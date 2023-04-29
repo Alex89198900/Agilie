@@ -40,15 +40,29 @@ function numbers2(firstNum, secondNum) {
 answers.task1 = testData.task1.map((el) => numbers2(el.firstNum, el.secondNum));
 
 /////////////////////////////////////////////////////task#2/////////////////////////////////////////////////////////////////////////////////
-function arrMethod(arr) {
-  let obj = {};
-  for (let i = 0; i < arr.length; ++i) {
-    let note = arr[i];
-    if (obj[note] != undefined) return note;
-    else obj[note] = 1;
+function findDuplicate(arr) {
+  let tortoise = arr[0];
+  let hare = arr[0];
+
+  while (true) {
+    tortoise = arr[tortoise];
+    hare = arr[arr[hare]];
+
+    if (tortoise === hare) {
+      break;
+    }
   }
+
+  tortoise = arr[0];
+
+  while (tortoise !== hare) {
+    tortoise = arr[tortoise];
+    hare = arr[hare];
+  }
+
+  return tortoise;
 }
-answers.task2 = testData.task2.map((el) => arrMethod(el));
+answers.task2 = testData.task2.map((el) => findDuplicate(el));
 //////////////////////////////////////////////////////////task#3///////////////////////////////////////////////////////////////////////////////
 function recordWeight(weight) {
   const availableNotes = [
