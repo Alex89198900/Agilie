@@ -4,7 +4,8 @@ const fs = require("fs");
 const answers = {
   task1: "",
   task2: "",
-  task3: "",
+  task3f: "",
+  task3s: "",
   task4: "",
 };
 /////////////////////////////////////////////task#1/////////////////////////////////////////////////////////////////////////////////////////////
@@ -62,7 +63,7 @@ function findDuplicate(arr) {
 }
 
 answers.task2 = testData.task2.map((el) => findDuplicate(el));
-//////////////////////////////////////////////////////////task#3///////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////task#3.1///////////////////////////////////////////////////////////////////////////////
 function recordWeight(weight) {
   const availableNotes = [
     25, 20.41, 20, 15.89, 15, 11.34, 10, 5, 4.54, 2.5, 1, 0.5,
@@ -84,7 +85,37 @@ function recordWeight(weight) {
 
   return result + 21;
 }
-answers.task3 = testData.task3.map((el) => recordWeight(el));
+answers.task3f = testData.task3f.map((el) => recordWeight(el));
+
+/////////////////////////////////////////////////////////task#3.2////////////////////////////////////////////////////////////////////////////
+function countTshirt(sizeHave, sizeNeed) {
+  const countSizes = {
+    S: sizeHave[0],
+    M: sizeHave[1],
+    L: sizeHave[2],
+    XL: sizeHave[3],
+    XXL: sizeHave[4],
+    XXXL: sizeHave[5],
+  };
+  let res = [];
+  let count = 0;
+  for (let i = 0; i < sizeNeed.length; i++) {
+    if (countSizes[sizeNeed[i][0]] > 0 || countSizes[sizeNeed[i][1]] > 0) {
+      if (countSizes[sizeNeed[i][0]] && countSizes[sizeNeed[i][0]] > 0) {
+        res.push(sizeNeed[i][0]);
+      }
+      if (countSizes[sizeNeed[i][1]] && countSizes[sizeNeed[i][1]] > 0) {
+        res.push(sizeNeed[i][1]);
+      }
+      count++;
+    }
+  }
+  let answer = count === sizeNeed.length ? "YES:" + res.join(",") : "NO";
+  return answer;
+}
+answers.task3s = testData.task3s.map((el) =>
+  countTshirt(el.sizeHave, el.sizeNeed)
+);
 //////////////////////////////////////////////////////////task#4//////////////////////////////////////////////////////////////////////////////
 
 function goodPos(grid) {
